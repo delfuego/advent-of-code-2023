@@ -1,0 +1,20 @@
+{
+  "name": "advent-of-code-2023",
+  "version": "1.0.0",
+  "description": "Advent of Code projects for 2023",
+  "main": "app.js",
+  "scripts": {
+    "day01": "node days/01.js",
+    "day02": "node days/02.js",
+    "day03": "node days/03.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "volta": {
+    "node": "18.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  }
+}
