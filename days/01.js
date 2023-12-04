@@ -1,4 +1,9 @@
-const fs = require('fs');
+// The trick to part two of this day is that overlapping text number strings like "twone"
+// need to be interpreted differently depending on whether you're looking for the FIRST
+// number in the line or the LAST one. If looking for the FIRST one, then "twone" means
+// "2ne"; if looking for the LAST one, then "twone" means "tw1".
+
+const utils = require('../lib/utils')();
 
 const textNums = {
 	'one': 1,
@@ -12,21 +17,12 @@ const textNums = {
 	'nine': 9,
 };
 
-function getDataLines() {
-	const allLines = fs.readFileSync('data/day01/input.txt', 'utf-8');
-	return allLines.split(/\r?\n/);
-}
-
-function isNumber(str) {
-	return /^\d$/.test(str);
-}
-
 function getFirstNumber(line, dayTwo = false) {
 	const textNumKeys = Object.keys(textNums);
 	let first = null, firstPos = Infinity;
 	for (let i = 0; i < line.length; i++) {
 		const char = line.substr(i, 1);
-		if (isNumber(char)) {
+		if (utils.isNumber(char)) {
 			if (i < firstPos) {
 				first = Number(char);
 				firstPos = i;
@@ -50,7 +46,7 @@ function getLastNumber(line, dayTwo = false) {
 	let last = null, lastPos = -Infinity;
 	for (let i = line.length - 1; i >= 0; i--) {
 		const char = line.substr(i, 1);
-		if (isNumber(char)) {
+		if (utils.isNumber(char)) {
 			if (i > lastPos) {
 				last = Number(char);
 				lastPos = i;
@@ -59,8 +55,7 @@ function getLastNumber(line, dayTwo = false) {
 	}
 	if (dayTwo) {
 		// here, have to search for the LAST instance of a test number, so have to iterate
-		// until we don't see any more.
-		// example for relevance: threekv33eightninethree
+		// until we don't see any more. Example for relevance: threekv33eightninethree
 		for (const textNumKey of textNumKeys) {
 			const textNumPos = line.lastIndexOf(textNumKey);
 			if (textNumPos > lastPos) {
@@ -73,27 +68,25 @@ function getLastNumber(line, dayTwo = false) {
 }
 
 function dayOnePartOne() {
-	const dataLines = getDataLines();
+	const dataLines = utils.getInputLines('data/day01/input.txt');
 	let total = 0;
 	dataLines.forEach(function (line) {
 		const first = getFirstNumber(line, false);
 		const last = getLastNumber(line, false);
 		const calibrationValue = first * 10 + last;
 		total += calibrationValue;
-		// console.log(line + ' -> ' + first + last + ' -> ' + calibrationValue + ' -> ' + total);
 	});
 	console.log('day one part one total: ' + total);
 }
 
 function dayOnePartTwo() {
-	const dataLines = getDataLines();
+	const dataLines = utils.getInputLines('data/day01/input.txt');
 	let total = 0;
 	dataLines.forEach(function (line) {
 		const first = getFirstNumber(line, true);
 		const last = getLastNumber(line, true);
 		const calibrationValue = first * 10 + last;
 		total += calibrationValue;
-		// console.log(line + ' -> ' + first + last + ' -> ' + calibrationValue + ' -> ' + total);
 	});
 	console.log('day one part two total: ' + total);
 }

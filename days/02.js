@@ -1,27 +1,20 @@
-const fs = require('fs');
-
-function getInputLines() {
-	const allLines = fs.readFileSync('data/day02/input.txt', 'utf-8');
-	return allLines.split(/\r?\n/).filter(function (line) {
-		return (line !== '');
-	});
-}
+const utils = require('../lib/utils')();
 
 function parseInputLine(line) {
-	const re = /^Game (\d+): (.*$)/;
-	const matches = line.match(re);
-	const sets = matches[2].split('; ').map(function (set) {
+	const fullLineRegex = /^Game (\d+): (.*$)/;
+	const lineMatches = line.match(fullLineRegex);
+	const diceSets = lineMatches[2].split('; ').map(function (set) {
 		const colors = set.split(', ');
-		const colorRe = /^(\d+) (.*)$/;
+		const colorRegex = /^(\d+) (.*)$/;
 		let rtn = {};
 		colors.forEach(function (color) {
-			const colorMatches = color.match(colorRe);
+			const colorMatches = color.match(colorRegex);
 			rtn[colorMatches[2]] = Number(colorMatches[1]);
 		});
 		return rtn;
 	});
 	let redMax = 0, greenMax = 0, blueMax = 0;
-	sets.forEach(function (set) {
+	diceSets.forEach(function (set) {
 		if (set.red && set.red > redMax) {
 			redMax = set.red;
 		}
@@ -34,8 +27,8 @@ function parseInputLine(line) {
 	});
 
 	return {
-		gameNum: Number(matches[1]),
-		sets: sets,
+		gameNum: Number(lineMatches[1]),
+		diceSets: diceSets,
 		redMax,
 		greenMax,
 		blueMax,
@@ -52,24 +45,22 @@ function getPossibleGames(games, redNum, greenNum, blueNum) {
 
 
 function dayTwoPartOne() {
-	const lines = getInputLines();
+	const lines = utils.getInputLines('data/day02/input.txt');
 	const games = lines.map(function (line) {
-		const p = parseInputLine(line);
-		return p;
+		return parseInputLine(line);
 	});
 	const possibleGames = getPossibleGames(games, 12, 13, 14);
 	let total = 0;
 	possibleGames.forEach(function (game) {
 		total += game.gameNum;
 	});
-	console.log('day two part one: ' + possibleGames.length + ' possibleGames, total ' + total);
+	console.log('day two part one: total ' + total);
 }
 
 function dayTwoPartTwo() {
-	const lines = getInputLines();
+	const lines = utils.getInputLines('data/day02/input.txt');
 	const games = lines.map(function (line) {
-		const p = parseInputLine(line);
-		return p;
+		return parseInputLine(line);
 	});
 	let total = 0;
 	games.forEach(function (game) {
