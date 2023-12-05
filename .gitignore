@@ -1,25 +1,11 @@
 .project
 .settings
-.scannerwork
 !.editorconfig
 !.envFiles
 .envFiles/*.env
 **/.DS_Store
-/build
-/bin/run-*.sh
-!/bin/run-*-sample.sh
-coverage
 
-# Contrast agent output files
-contrast_effective_config.json
-contrast_service.log
-contrast_system_info.json
-node-contrast*
-security.log
-
-# don't ignore node_modules dotfiles, except the .bin and .cache dirs and puppeteer's .local-chromium install
+# don't ignore node_modules dotfiles, except the .bin and .cache dirs
 !/node_modules/**/.*
 /node_modules/.bin
 /node_modules/.cache
-/node_modules/puppeteer/.local-chromium
-/node_modules/mongo-unit/.mongo-unit
