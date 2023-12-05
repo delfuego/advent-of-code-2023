@@ -58,7 +58,10 @@ function getDest(source, ranges) {
 		if (source >= range.sourceStart && source < (range.sourceStart + range.length)) {
 			// we're in the right range
 			dest = range.destStart + (source - range.sourceStart);
-			// I don't think I should break out, since there might be an overlapping range in the full input
+			// Note that I've tested to see if this break matters, and for my input, it does not -- but could the
+			// maps contain a range that's within another range, and "re-maps" that smaller range? In theory
+			// it could, and then a break here would lead to the wrong destination.
+			break;
 		}
 	}
 	if (!dest) {
@@ -91,8 +94,8 @@ function dayFivePartOne() {
 	console.log(`day five part one: lowest location ${lowLoc} (seed ${lowSeed})`);
 }
 
-// Note that this is SLOW for the real input, since at least for MY real input, there are
-// a total of 1,699,478,662 seeds! It took about 7 min on my M1 Max MBP to run.
+// Note that this isn't fast for the real input, since at least for MY real input, there are
+// a total of 1,699,478,662 seeds! It took about 3.5 min on my M1 Max MBP to run.
 function dayFivePartTwo() {
 	let lowLoc = Infinity, lowSeed;
 	while (seedInfo.length > 0) {
