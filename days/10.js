@@ -138,6 +138,14 @@ function dayTenPartOne() {
 }
 
 function dayTenPartTwo() {
+	// The overall schema for this is:
+	// - start at the top left, moving right
+	// - if we reach a vertical pipe, flip from inside to outside or vice versa
+	// - if we are not on a path and reach a valid starting-a-pipe character (F or L), set that we're on path and set whether we came from top or bottom
+	// - if we ARE on a path and reach a continue-pipe character (-), keep going
+	// - if we ARE on a path and reach a valid ending-a-pipe character (J or 7), end that we're on a path, and then if we came from one direction (top or bottom) but are leaving in the other direction, flip from inside to outside or vice versa
+	// - if we reach a null, and we are inside, then increment our inside count by 1
+	// -- when we reach the end of a line, reset our on-path, is-inside, and direction variables, and start again for the next line
 	let insideCount = 0;
 	mappedPath.forEach(function (row, r) {
 		let onPath = false,
