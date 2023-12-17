@@ -4,7 +4,7 @@
   "description": "Advent of Code projects for 2023",
   "main": "app.js",
   "scripts": {
-    "start": "node days/15.js",
+    "start": "node days/16.js",
     "day01": "node days/01.js",
     "day02": "node days/02.js",
     "day03": "node days/03.js",
@@ -19,13 +19,14 @@
     "day12": "node days/12.js",
     "day13": "node days/13.js",
     "day14": "node days/14.js",
-    "day15": "node days/15.js"
+    "day15": "node days/15.js",
+    "day16": "node days/16.js"
   },
   "engines": {
     "node": "20.x"
   },
   "volta": {
-    "node": "20.3.1"
+    "node": "20.10.0"
   },
   "devDependencies": {
     "eslint": "^8.55.0"
