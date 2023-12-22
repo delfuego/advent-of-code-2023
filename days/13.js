@@ -2,7 +2,7 @@ const utils = require('../lib/utils')();
 
 function parseInput(path) {
 	const parts = utils.getInputLines(path, true);
-	return parts.map(function (part) { return part.map(function (line) { return line.split(''); })});
+	return parts.map(function (part) { return part.map(function (line) { return line.split(''); });});
 }
 
 function checkPartForVerticalMirror(part, ignore = null) {
