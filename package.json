@@ -4,7 +4,7 @@
   "description": "Advent of Code projects for 2023",
   "main": "app.js",
   "scripts": {
-    "start": "node days/23.js",
+    "start": "node days/24.js",
     "day01": "node days/01.js",
     "day02": "node days/02.js",
     "day03": "node days/03.js",
@@ -26,7 +26,8 @@
     "day20": "node days/20.js",
     "day21": "node days/21.js",
     "day22": "node days/22.js",
-    "day23": "node days/23.js"
+    "day23": "node days/23.js",
+    "day24": "node days/24.js"
   },
   "engines": {
     "node": "20.x"
